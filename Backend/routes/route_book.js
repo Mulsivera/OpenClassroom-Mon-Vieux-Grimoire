@@ -6,6 +6,9 @@ const bookCtrl = require('../controllers/controller_book')
 
 const auth = require('../middleware/middleware_auth')
 
-router.get('/', auth, bookCtrl.getAllBook); 
+const upload = require('../middleware/middleware_multer_config')
+
+router.get('/', bookCtrl.getAllBooks);
+router.post('/', auth, upload, upload.resizeImage, bookCtrl.createBook)
 
 module.exports = router;
