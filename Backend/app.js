@@ -1,6 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose');
 
+const bookRoutes = require('./routes/route_book')
+
 const app = express();
 
 mongoose.connect('mongodb+srv://monvieuxgrimoireadmin:monvieuxgrimoireadmin@monvieuxgrimoire.enpi5.mongodb.net/?retryWrites=true&w=majority&appName=MonVieuxGrimoire',
@@ -15,27 +17,5 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
 });
-
-app.use('/', (req, res, next) => {
-  const book = [
-    {
-      _id: 'foezhfouzeofu',
-      title: 'Mon 1er livre',
-      author: 'moi même',
-      year: '2',
-      genre: 'comédie',
-      averageRating: '3'
-    },
-    {
-      _id: 'foezhfouzeofu',
-      title: 'Mon 1er livre',
-      author: 'moi même',
-      year: '2',
-      genre: 'comédie',
-      averageRating: '3'
-    },
-  ];
-  res.status(200).json(book);
-})
 
 module.exports = app;
