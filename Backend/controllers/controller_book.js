@@ -18,7 +18,7 @@ exports.createBook = (req, res, next) => {
       averageRating: bookObject.ratings[0].grade
   });
   book.save()
-      .then(() => { res.status(201).json({ message: 'Objet enregistré !' }) })
+      .then(() => { res.status(201).json({ message: 'Nouveau livre ajouté' }) })
       .catch(error => { res.status(400).json( { error }) })
 };
 
@@ -30,7 +30,7 @@ exports.getOneBook = (req, res, next) => {
 
 exports.removeOneBook = (req, res, next) => {
   Book.deleteOne({ _id: req.params.id })
-      .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
+      .then(() => res.status(200).json({ message: 'Livre supprimé'}))
       .catch(error => res.status(400).json({ error }));
 }
 
@@ -47,7 +47,7 @@ exports.updateBook = (req, res, next) => {
                   })
               );
               Book.updateOne({ _id: req.params.id }, { ...bookObject, _id: req.params.id })
-                  .then(() => res.status(200).json({ message: 'Objet modifié !' }))
+                  .then(() => res.status(200).json({ message: 'Livre modifié !' }))
                   .catch(error => res.status(400).json({ error }));
           })
       }
@@ -64,9 +64,6 @@ exports.postRating = (req, res, next) => {
   const user = req.body.userId;
   Book.findById(req.params.id)
     .then(book => {
-      if (!book) {
-        return res.status(404).json({ error: "Livre non trouvé." });
-      }
       const userRating = book.ratings.find(rating => rating.userId === userId);
       book.ratings.push({ userId, grade: rating });
       const totalRatings = book.ratings.length;
