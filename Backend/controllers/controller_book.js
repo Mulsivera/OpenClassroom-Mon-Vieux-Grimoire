@@ -18,7 +18,7 @@ exports.createBook = (req, res, next) => {
       averageRating: bookObject.ratings[0].grade
   });
   book.save()
-      .then(() => { res.status(201).json({ message: 'Nouveau livre ajouté' }) })
+      .then(() => { res.status(201).json({ message: 'Livre ajouté' }) })
       .catch(error => { res.status(400).json( { error }) })
 };
 
